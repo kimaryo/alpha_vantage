@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-
 import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
 import { SearchbarComponent } from "../searchbar/searchbar.component";

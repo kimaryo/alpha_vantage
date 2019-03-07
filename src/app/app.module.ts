@@ -41,12 +41,12 @@ import { CompanyComponent } from "./company/company.component";
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    HighchartsChartModule,
     StoreModule.forRoot({
       stocks,
       auth
     }),
     StoreDevtoolsModule.instrument()
-    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent],
