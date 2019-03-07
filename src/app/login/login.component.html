@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+<div class="login-page">
+  <div class="form">
+    <form *ngIf="!signInPage" class="register-form">
+      <input [(ngModel)]="createAccount.name" name="name" type="text" placeholder="Name"/>
+      <input [(ngModel)]="createAccount.email" name="email" type="text" placeholder="Email"/>
+      <input [(ngModel)]="createAccount.password" name="password" type="password" placeholder="Password"/>
+      <input [(ngModel)]="createAccount.password2" name="password2" type="password" placeholder="Repeat password"/>
+      <button type="submit">create</button>
+      <p class="message">Already registered? <a style="cursor:pointer;" (click)="onChangeSignInPage(true)">Sign In</a></p>
+    </form>
+    <form *ngIf="signInPage" #loginForm="ngForm" (ngSubmit)="onLogin()" class="login-form">
+      <input [(ngModel)]="signIn.email" name="email" type="text" placeholder="username"/>
+      <input [(ngModel)]="signIn.password" name="password" type="password" placeholder="password"/>
+      <button [disabled]="!loginForm.form.valid" type="submit">login</button>
+      <p class="message">Not registered? <a style="cursor:pointer;" (click)="onChangeSignInPage(false)">Create an account</a></p>
+    </form>
+  </div>
+</div>

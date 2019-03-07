@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -7,12 +8,11 @@ import { NavComponent } from "./nav/nav.component";
 import { ContactComponent } from "./contact/contact.component";
 import { AboutComponent } from "./about/about.component";
 import { HomeComponent } from "./home/home.component";
-<<<<<<< HEAD
-import { LoginComponent } from './login/login.component';
-=======
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { LoginComponent } from './login/login.component';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
->>>>>>> 212fb6869a4e11d3bd1552ca8809d2eaa3a0dc39
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +21,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ContactComponent,
     AboutComponent,
     HomeComponent,
-<<<<<<< HEAD
-    LoginComponent
-=======
-    SearchbarComponent,
-    NgbModule
->>>>>>> 212fb6869a4e11d3bd1552ca8809d2eaa3a0dc39
+    LoginComponent,
+    RegisterComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
