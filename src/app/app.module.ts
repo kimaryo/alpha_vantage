@@ -10,16 +10,16 @@ import { AboutComponent } from "./about/about.component";
 import { HomeComponent } from "./home/home.component";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
-
 import { stocks } from "./reducers/stocks.reducer";
 import { auth } from "./reducers/auth.reducer";
-
 import { SearchbarComponent } from "./searchbar/searchbar.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { LoginComponent } from './login/login.component';
-
 import { ReactiveFormsModule } from "@angular/forms";
 import { ModalContentComponent } from './modal-content/modal-content.component';
+import { FormsModule } from "@angular/forms";
+import { HighchartsChartModule } from "highcharts-angular";
+import { CompanyComponent } from './company/company.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,8 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
     LoginComponent,
     SearchbarComponent,
     ModalContentComponent
+    StockpageComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
       auth
     }),
     StoreDevtoolsModule.instrument()
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent],

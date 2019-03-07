@@ -14,7 +14,8 @@
   <ul *ngIf = "stocks">
     <li *ngFor = "let date of dates" style="white-space: nowrap">
       <div style="display:inline-block; margin-right:20px;">
-            <h4>Stock symbol: {{metaData['2. Symbol']}} <h5>{{date}}</h5></h4>
+            <a routerLink="/company/{{metaData['2. Symbol']}}" ><h4>Stock symbol: {{metaData['2. Symbol']}}</h4></a>
+            <h5>{{date}}</h5>
             <div>
               Closed at: {{stocks[date]["4. close"]}} $
             </div>
