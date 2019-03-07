@@ -7,6 +7,7 @@ import { NavComponent } from "./nav/nav.component";
 import { ContactComponent } from "./contact/contact.component";
 import { AboutComponent } from "./about/about.component";
 import { HomeComponent } from "./home/home.component";
+import { StoreModule } from "@ngrx/store";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,14 @@ import { HomeComponent } from "./home/home.component";
     AboutComponent,
     HomeComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    StoreModule.provideStore({
+      //place for future reducers
+    })
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
