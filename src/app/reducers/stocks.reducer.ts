@@ -1,4 +1,4 @@
-export const campaigns = (state: any = [], { type, payload }) => {
+export const stocks = (state: any = [], { type, payload }) => {
   switch (type) {
     case "ADD_STOCK":
       return payload;

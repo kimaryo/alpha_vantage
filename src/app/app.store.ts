@@ -1,6 +1,6 @@
-import { Stocks } from "./_models/campaign";
+import { Stock } from "./shared/models/stock.model";
 
 export interface AppStore {
-  stocks: Stocks[];
+  stocks: Stock[];
   // other properties...
 }

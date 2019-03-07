@@ -1,24 +1,37 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import "rxjs/add/operator/map";
-import { Stock } from "../../shared/models/user.model";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+
+import { Stock } from "../../shared/models/stock.model";
+import { AppStore } from "../../app.store";
 
 const DUMMY_COMPANIES = ["MSFT", "BA", "AAPL", "TSLA"];
 const API_KEY = "F8EATDHYRIQMFR0N";
 const BASE_URL = "https://www.alphavantage.co/query?";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class StockService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient, private store: Store<AppStore>) {
+    this.stocks = store.select(s => s.stocks);
+  }
 
-  getStock(): Observable<Stock[]> {
+  getStock() {
     return this.http
       .get(
         `${BASE_URL}function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&apikey=${API_KEY}`
       )
-      .map((res: Response) => {
-        const stock: Stock = res.json();
-        console.log(stock);
+      .pipe(
+        map(res => {
+          const stock: Stock = res;
+
+          return new Stock().deserialize(stock);
+        })
+      )
+      .subscribe(res => {
+        this.store.dispatch({ type: "ADD_STOCK", payload: res });
       });
   }
 }

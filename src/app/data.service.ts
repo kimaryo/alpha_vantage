@@ -19,8 +19,6 @@ export class DataService {
     return console.log("Clicked");
   }
 
-  StockService();
-
   getData(): Observable<any[]> {
     return this.http
       .get(this.url_daily + `symbol=${"MSFT"}&apikey=${this.api_key}`)

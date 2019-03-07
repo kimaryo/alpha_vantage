@@ -28,10 +28,10 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    StoreModule.provideStore({
+    StoreModule.forRoot({
       stocks
     }),
-    StoreDevtoolsModule.instrumentOnlyWithExtension()
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]
