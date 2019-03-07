@@ -9,6 +9,8 @@ import { AboutComponent } from "./about/about.component";
 import { HomeComponent } from "./home/home.component";
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     SearchbarComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule, FormsModule,
+    ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,10 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../data.service";
+import { SearchbarComponent } from "../searchbar/searchbar.component";
+import { ContactComponent } from "../contact/contact.component";
+
+
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.css"]
 })
+
+
 export class HomeComponent implements OnInit {
   metaData: Object;
   stocks: Object;
