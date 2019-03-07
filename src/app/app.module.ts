@@ -11,6 +11,8 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
 
 import { stocks } from "./reducers/stocks.reducer";
+import { SearchbarComponent } from "./searchbar/searchbar.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -18,12 +20,14 @@ import { stocks } from "./reducers/stocks.reducer";
     NavComponent,
     ContactComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    SearchbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
     StoreModule.provideStore({
       stocks
     }),
