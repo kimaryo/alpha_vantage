@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+
 import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
+import { SearchbarComponent } from "../searchbar/searchbar.component";
+import { ContactComponent } from "../contact/contact.component";
 
 @Component({
   selector: "app-home",
