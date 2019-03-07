@@ -7,6 +7,8 @@ import { NavComponent } from "./nav/nav.component";
 import { ContactComponent } from "./contact/contact.component";
 import { AboutComponent } from "./about/about.component";
 import { HomeComponent } from "./home/home.component";
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { HomeComponent } from "./home/home.component";
     NavComponent,
     ContactComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    SearchbarComponent,
+    NgbModule
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
