@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ModalContentComponent } from './modal-content/modal-content.component';
 import { FormsModule } from "@angular/forms";
 import { HighchartsChartModule } from "highcharts-angular";
-import { CompanyComponent } from './company/company.component';
+import { CompanyComponent } from "./company/company.component";
 
 @NgModule({
   declarations: [
