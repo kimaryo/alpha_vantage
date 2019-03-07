@@ -8,7 +8,7 @@ import { ContactComponent } from "./contact/contact.component";
 import { AboutComponent } from "./about/about.component";
 import { HomeComponent } from "./home/home.component";
 import { SearchbarComponent } from './searchbar/searchbar.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,10 +17,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ContactComponent,
     AboutComponent,
     HomeComponent,
-    SearchbarComponent,
-    NgbModule
+    SearchbarComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [],
   bootstrap: [AppComponent]
 })
