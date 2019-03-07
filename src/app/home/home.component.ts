@@ -13,6 +13,7 @@ import { ContactComponent } from "../contact/contact.component";
 export class HomeComponent implements OnInit {
   metaData: Object;
   stocks: Object;
+  subscription: Object;
   dates = [];
   today = new Date().toISOString().substring(0, 10);
   constructor(private data: DataService, private stockServices: StockService) {

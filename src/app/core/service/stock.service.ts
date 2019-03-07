@@ -14,6 +14,7 @@ const BASE_URL = "https://www.alphavantage.co/query?";
   providedIn: "root"
 })
 export class StockService {
+  stocks: Object;
   constructor(private http: HttpClient, private store: Store<AppStore>) {
     this.stocks = store.select(s => s.stocks);
   }
