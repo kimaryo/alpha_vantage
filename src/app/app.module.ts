@@ -1,6 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -14,9 +13,9 @@ import { stocks } from "./reducers/stocks.reducer";
 import { auth } from "./reducers/auth.reducer";
 import { SearchbarComponent } from "./searchbar/searchbar.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from "./login/login.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { ModalContentComponent } from './modal-content/modal-content.component';
+import { ModalContentComponent } from "./modal-content/modal-content.component";
 import { FormsModule } from "@angular/forms";
 import { HighchartsChartModule } from "highcharts-angular";
 import { CompanyComponent } from "./company/company.component";
@@ -31,8 +30,7 @@ import { NgxLoadingModule } from "ngx-loading";
     HomeComponent,
     LoginComponent,
     SearchbarComponent,
-    ModalContentComponent
-    StockpageComponent,
+    ModalContentComponent,
     CompanyComponent
   ],
   imports: [
@@ -52,6 +50,6 @@ import { NgxLoadingModule } from "ngx-loading";
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ ModalContentComponent ]
+  entryComponents: [ModalContentComponent]
 })
 export class AppModule {}
