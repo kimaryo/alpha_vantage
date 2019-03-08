@@ -1,8 +1,36 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
 import * as Highcharts from "highcharts";
+
+var startDate = new Date();
+startDate.setDate(startDate.getDate() - 20);
+var dd = startDate.getDate();
+var mm = startDate.getMonth();
+Highcharts.setOptions({
+  title: { text: "Stock data past 20 days" },
+  yAxis: {
+    title: {
+      text: "USD"
+    }
+  },
+  xAxis: {
+    title: {
+      text: "Date"
+    },
+    type: "datetime",
+    dateTimeLabelFormats: {
+      day: "%e %b"
+    }
+  },
+  plotOptions: {
+    series: {
+      pointStart: Date.UTC(2019, mm, dd),
+      pointInterval: 24 * 3600 * 1000 // one day
+    }
+  }
+});
 
 @Component({
   selector: "app-company",
@@ -12,14 +40,17 @@ import * as Highcharts from "highcharts";
 export class CompanyComponent implements OnInit {
   dates = [];
   sub: Object;
+  loading = false;
+  subscription: Object;
   chartData = [];
   companySymbol: String;
   Highcharts = Highcharts;
   stockData: Object;
+
   chartOptions = {
     series: [
       {
-        data: this.chartData
+        data: this.setDataHighChart()
       }
     ]
   };
@@ -34,9 +65,9 @@ export class CompanyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
     this.sub = this.route.params.subscribe(params => {
       this.companySymbol = params["symbol"];
-      // In a real app: dispatch action to load the details here.
     });
 
     this.subscription = this.stocks.subscribe(
@@ -47,36 +78,29 @@ export class CompanyComponent implements OnInit {
           this.metaData = response["Meta Data"];
           this.stockData = response["Time Series (Daily)"];
           this.dates = Object.keys(this.stockData).slice(0, 20);
-          let chartData = [];
-          console.log(this.stockData[this.dates[0]]["4. close"]);
-          console.log(this.dates);
-          for (let date in this.dates) {
-            chartData.push(
-              parseInt(this.stockData[this.dates[date]]["4. close"])
-            );
-          }
         }
-        this.chartData = chartData;
-        this.chartOptions = {
-          series: [
-            {
-              data: this.chartData
-            }
-          ]
-        };
-        console.log(this.chartData);
+        this.setDataHighChart();
       },
+      (this.loading = false),
       error => console.log(error)
     );
   }
 
-  getDataHighChart() {
-    console.log(this.stockData);
+  setDataHighChart() {
     let chartData = [];
-    for (let date in this.dates) {
-      chartData.push(parseInt(this.stockData[this.dates[date]]["4. close"]));
+    if (this.stockData) {
+      for (let date in this.dates) {
+        chartData.push(parseInt(this.stockData[this.dates[date]]["4. close"]));
+      }
+      this.chartData = chartData;
+      this.chartOptions = {
+        series: [
+          {
+            name: "Closing value",
+            data: this.chartData
+          }
+        ]
+      };
     }
-    console.log(chartData);
-    return chartData;
   }
 }

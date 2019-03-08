@@ -20,6 +20,7 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
 import { FormsModule } from "@angular/forms";
 import { HighchartsChartModule } from "highcharts-angular";
 import { CompanyComponent } from "./company/company.component";
+import { NgxLoadingModule } from "ngx-loading";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CompanyComponent } from "./company/company.component";
       stocks,
       auth
     }),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    NgxLoadingModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent],
