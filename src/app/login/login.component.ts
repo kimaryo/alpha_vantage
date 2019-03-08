@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from "../core/service/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -8,13 +9,13 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   signInPage: boolean = true
-  signIn: ngModel = { email: '', password: ''},
-  createAccount: ngModel = { name: '', email: '', password: '', password2: ''},
-
-
-  constructor() { }
+  signIn: ngModel = { email: '', password: ''}
+  createAccount: ngModel = { name: '', email: '', password: '', password2: ''}
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
+    this.authService.validateSession()
   }
 
   onChangeSignInPage(value){
@@ -22,7 +23,11 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(){
-    console.log(this.model.email)
+    this.authService.login(this.signIn.email, this.signIn.password)
+  }
+
+  onRegister() {
+    this.authService.register(this.createAccount)
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="login-page">
   <div class="form">
-    <form *ngIf="!signInPage" class="register-form">
+    <form *ngIf="!signInPage" #registerForm="ngForm" (ngSubmit)="onRegister()" class="register-form">
       <input [(ngModel)]="createAccount.name" name="name" type="text" placeholder="Name"/>
       <input [(ngModel)]="createAccount.email" name="email" type="text" placeholder="Email"/>
       <input [(ngModel)]="createAccount.password" name="password" type="password" placeholder="Password"/>
