@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -11,11 +12,14 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { StoreModule } from "@ngrx/store";
 
 import { stocks } from "./reducers/stocks.reducer";
+import { auth } from "./reducers/auth.reducer";
+
 import { SearchbarComponent } from "./searchbar/searchbar.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { LoginComponent } from './login/login.component';
 
-import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ModalContentComponent } from './modal-content/modal-content.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { ReactiveFormsModule } from "@angular/forms";
     ContactComponent,
     AboutComponent,
     HomeComponent,
-    SearchbarComponent
+    LoginComponent,
+    SearchbarComponent,
+    ModalContentComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +40,13 @@ import { ReactiveFormsModule } from "@angular/forms";
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      stocks
+      stocks,
+      auth
     }),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ModalContentComponent ]
 })
 export class AppModule {}
