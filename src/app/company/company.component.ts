@@ -4,32 +4,12 @@ import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
 import * as Highcharts from "highcharts";
 
-var startDate = new Date();
+let startDate = new Date();
 startDate.setDate(startDate.getDate() - 20);
-var dd = startDate.getDate();
-var mm = startDate.getMonth();
+let dd = startDate.getDate();
+let mm = startDate.getMonth();
 Highcharts.setOptions({
-  title: { text: "Stock data past 20 days" },
-  yAxis: {
-    title: {
-      text: "USD"
-    }
-  },
-  xAxis: {
-    title: {
-      text: "Date"
-    },
-    type: "datetime",
-    dateTimeLabelFormats: {
-      day: "%e %b"
-    }
-  },
-  plotOptions: {
-    series: {
-      pointStart: Date.UTC(2019, mm, dd),
-      pointInterval: 24 * 3600 * 1000 // one day
-    }
-  }
+  title: { text: "Stock data past 20 days" }
 });
 
 @Component({
@@ -42,10 +22,8 @@ export class CompanyComponent implements OnInit {
   sub: Object;
   loading = false;
   subscription: Object;
-  chartData = [];
   companySymbol: String;
   Highcharts = Highcharts;
-  stockData: Object;
 
   chartOptions = {
     series: [
@@ -54,6 +32,9 @@ export class CompanyComponent implements OnInit {
       }
     ]
   };
+
+  stockData: Object;
+
   stocks: Object;
   metaData: Object;
   constructor(
@@ -72,6 +53,7 @@ export class CompanyComponent implements OnInit {
 
     this.subscription = this.stocks.subscribe(
       response => {
+        console.log(response);
         // Currently the stocks is an array, a little bit contradictiv since we save it as an object.
         // TODO: Add an initial state to the reducer store.
         if (response.length !== 0) {
@@ -92,12 +74,27 @@ export class CompanyComponent implements OnInit {
       for (let date in this.dates) {
         chartData.push(parseInt(this.stockData[this.dates[date]]["4. close"]));
       }
-      this.chartData = chartData;
       this.chartOptions = {
+        yAxis: {
+          title: {
+            text: "USD"
+          }
+        },
+        xAxis: {
+          title: {
+            text: "Date"
+          },
+          type: "datetime",
+          dateTimeLabelFormats: {
+            day: "%e. %b"
+          }
+        },
         series: [
           {
+            pointStart: Date.UTC(2019, mm, dd),
+            pointInterval: 24 * 3600 * 1000, // one day,
             name: "Closing value",
-            data: this.chartData
+            data: chartData
           }
         ]
       };
