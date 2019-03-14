@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
 import { SearchbarComponent } from "../searchbar/searchbar.component";
 import { ContactComponent } from "../contact/contact.component";
@@ -15,7 +14,7 @@ export class HomeComponent implements OnInit {
   subscription: Object;
   dates = [];
   today = new Date().toISOString().substring(0, 10);
-  constructor(private data: DataService, private stockServices: StockService) {
+  constructor(private stockServices: StockService) {
     this.stocks = stockServices.stocks;
   }
 

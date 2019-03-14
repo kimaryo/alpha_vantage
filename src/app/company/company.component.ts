@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
 import * as Highcharts from "highcharts";
 
@@ -39,7 +38,6 @@ export class CompanyComponent implements OnInit {
   metaData: Object;
   constructor(
     private route: ActivatedRoute,
-    private data: DataService,
     private stockServices: StockService
   ) {
     this.stocks = stockServices.stocks;
