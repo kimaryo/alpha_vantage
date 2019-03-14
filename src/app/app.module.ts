@@ -20,6 +20,7 @@ import { FormsModule } from "@angular/forms";
 import { HighchartsChartModule } from "highcharts-angular";
 import { CompanyComponent } from "./company/company.component";
 import { NgxLoadingModule } from "ngx-loading";
+import { NgCircleProgressModule } from "ng-circle-progress";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,15 @@ import { NgxLoadingModule } from "ngx-loading";
   ],
   imports: [
     BrowserModule,
+    NgCircleProgressModule.forRoot({
+      radius: 20,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+      animationDuration: 5000
+    }),
     AppRoutingModule,
     HttpClientModule,
     NgbModule,

@@ -1,5 +1,8 @@
 export const stocks = (state: any = [], { type, payload }) => {
   switch (type) {
+    case "GET_MY_STOCKS_SUCCESS":
+      console.log(payload);
+      return payload;
     case "ADD_STOCK":
       return payload;
     case "CREATE_STOCK":

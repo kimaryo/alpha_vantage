@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
+import { AuthService } from "../core/service/auth.service";
 import { SearchbarComponent } from "../searchbar/searchbar.component";
 import { ContactComponent } from "../contact/contact.component";
 
@@ -13,13 +14,20 @@ export class HomeComponent implements OnInit {
   metaData: Object;
   stocks: Object;
   subscription: Object;
+  user: Object;
   dates = [];
   today = new Date().toISOString().substring(0, 10);
-  constructor(private data: DataService, private stockServices: StockService) {
+  constructor(
+    private data: DataService,
+    private stockServices: StockService,
+    private authService: AuthService
+  ) {
     this.stocks = stockServices.stocks;
+    this.user = authService.auth.user;
   }
 
   ngOnInit() {
+    this.authService.validateSession();
     this.subscription = this.stocks.subscribe(
       response => {
         // Currently the stocks is an array, a little bit contradictiv since we save it as an object.
@@ -32,8 +40,14 @@ export class HomeComponent implements OnInit {
       },
       error => console.log(error)
     );
-
     this.stockServices.getStock();
+    setTimeout(() => console.log(this.stocks), 2000);
+    setTimeout(() => console.log(this.authService.auth), 2000);
+
+    if (this.authService.user && this.authService.user._id) {
+      console.log(this.authService.user._id);
+      this.stockServices.getMyStocks(this.authService.user._id);
+    }
   }
 
   ngOnDestroy() {

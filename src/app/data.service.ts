@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, forkJoin } from "rxjs";
 import { map } from "rxjs/operators";
-import StockService from "./core/service/stock.service";
 
 @Injectable({
   providedIn: "root"

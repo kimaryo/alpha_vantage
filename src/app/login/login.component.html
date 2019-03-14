@@ -1,18 +1,105 @@
 <div class="login-page">
+  <video autoplay loop id="myVideo" muted plays-inline>
+    <source
+      src="https://ak4.picdn.net/shutterstock/videos/1023269464/preview/stock-footage--d-animation-of-d-vector-graphics-graphs-and-charts-across-a-screen-showing-data-visualizations.webm"
+      type="video/mp4"
+    />
+  </video>
+  <h1 class="title">Welcome to Stock List</h1>
   <div class="form">
-    <form *ngIf="!signInPage" #registerForm="ngForm" (ngSubmit)="onRegister()" class="register-form">
-      <input [(ngModel)]="createAccount.name" name="name" type="text" placeholder="Name"/>
-      <input [(ngModel)]="createAccount.email" name="email" type="text" placeholder="Email"/>
-      <input [(ngModel)]="createAccount.password" name="password" type="password" placeholder="Password"/>
-      <input [(ngModel)]="createAccount.password2" name="password2" type="password" placeholder="Repeat password"/>
-      <button type="submit">create</button>
-      <p class="message">Already registered? <a style="cursor:pointer;" (click)="onChangeSignInPage(true)">Sign In</a></p>
+    <form
+      *ngIf="!signInPage"
+      #registerForm="ngForm"
+      (ngSubmit)="onRegister()"
+      class="register-form"
+    >
+      <h3 class="card_title">Register</h3>
+      <input
+        [(ngModel)]="createAccount.name"
+        name="name"
+        type="text"
+        placeholder="Name"
+      />
+      <input
+        [(ngModel)]="createAccount.email"
+        name="email"
+        type="text"
+        placeholder="Email"
+      />
+      <input
+        [(ngModel)]="createAccount.password"
+        name="password"
+        type="password"
+        placeholder="Password"
+      />
+      <input
+        [(ngModel)]="createAccount.password2"
+        name="password2"
+        type="password"
+        placeholder="Repeat password"
+      />
+      <button type="submit">
+        <circle-progress
+          [percent]="100"
+          [radius]="20"
+          [outerStrokeWidth]="2"
+          [innerStrokeWidth]="2"
+          [outerStrokeColor]="'#FFF'"
+          [innerStrokeColor]="'#FFF'"
+          [animation]="true"
+          [animationDuration]="10000"
+          [showImage]="true"
+          *ngIf="auth.creatingAccount"
+        ></circle-progress>
+        <p *ngIf="!auth.creatingAccount">create</p>
+      </button>
+      <p class="message">
+        Already registered?
+        <a style="cursor:pointer;" (click)="onChangeSignInPage(true)"
+          >Sign In</a
+        >
+      </p>
     </form>
-    <form *ngIf="signInPage" #loginForm="ngForm" (ngSubmit)="onLogin()" class="login-form">
-      <input [(ngModel)]="signIn.email" name="email" type="text" placeholder="username"/>
-      <input [(ngModel)]="signIn.password" name="password" type="password" placeholder="password"/>
-      <button [disabled]="!loginForm.form.valid" type="submit">login</button>
-      <p class="message">Not registered? <a style="cursor:pointer;" (click)="onChangeSignInPage(false)">Create an account</a></p>
+    <form
+      *ngIf="signInPage"
+      #loginForm="ngForm"
+      (ngSubmit)="onLogin()"
+      class="login-form"
+    >
+      <h3 class="card_title">Sign in</h3>
+      <input
+        [(ngModel)]="signIn.email"
+        name="email"
+        type="text"
+        placeholder="username"
+      />
+      <input
+        [(ngModel)]="signIn.password"
+        name="password"
+        type="password"
+        placeholder="password"
+      />
+      <button [disabled]="!loginForm.form.valid" type="submit">
+        <circle-progress
+          [percent]="100"
+          [radius]="20"
+          [outerStrokeWidth]="2"
+          [innerStrokeWidth]="2"
+          [outerStrokeColor]="'#FFF'"
+          [innerStrokeColor]="'#FFF'"
+          [animation]="true"
+          [animationDuration]="10000"
+          [showImage]="true"
+          *ngIf="auth.signingIn"
+        ></circle-progress>
+        <p *ngIf="!auth.signingIn">Log in</p>
+      </button>
+      <p class="message">
+        Not registered?
+        <a style="cursor:pointer;" (click)="onChangeSignInPage(false)"
+          >Create an account</a
+        >
+      </p>
     </form>
   </div>
 </div>
