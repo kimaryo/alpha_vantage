@@ -9,8 +9,8 @@ import { AuthService } from "../core/service/auth.service";
 })
 export class LoginComponent implements OnInit {
   signInPage: boolean = true;
-  signIn: ngModel = { email: "", password: "" };
-  createAccount: ngModel = { name: "", email: "", password: "", password2: "" };
+  signIn: Object = { email: "", password: "" };
+  createAccount: Object = { name: "", email: "", password: "", password2: "" };
   signingIn: boolean = false;
   creatingAccount: boolean = false;
   auth: AuthService = null;

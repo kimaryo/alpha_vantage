@@ -33,11 +33,11 @@ export class StockService {
         },
         error => {
           this.store.dispatch({ type: "GET_MY_STOCKS_FAILED" });
-          const modalRef = this.modalService.open(ModalContentComponent);
-          modalRef.componentInstance.content = {
-            title: "Something went wrong",
-            text: "Something went wrong. Please try again"
-          };
+          // const modalRef = this.modalService.open(ModalContentComponent);
+          // modalRef.componentInstance.content = {
+          //   title: "Something went wrong",
+          //   text: "Something went wrong. Please try again"
+          // };
         }
       );
   }

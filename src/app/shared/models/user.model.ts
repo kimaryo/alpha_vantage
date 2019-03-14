@@ -1,6 +1,6 @@
 import { Deserializable } from "./deserializable.model";
 
-export class Stock implements Deserializable {
+export class User implements Deserializable {
   "_id": String;
   "email": String;
   "name": String;
