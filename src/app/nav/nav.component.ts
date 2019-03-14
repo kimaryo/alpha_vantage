@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../core/service/auth.service";
 
 @Component({
   selector: "app-nav",
@@ -7,7 +8,20 @@ import { Component, OnInit } from "@angular/core";
 })
 export class NavComponent implements OnInit {
   appTitle: string = "StockList™";
-  constructor() {}
+  visible: boolean = false
+  constructor(private authService: AuthService) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const splitUrl = window.location.href.split('/')
+    if (splitUrl[splitUrl.length - 1] === '')
+      this.visible = false
+    else
+      this.visible = true
+  }
+
+  signOut(){
+    this.visible = false
+    this.authService.signOut()
+  }
 }
