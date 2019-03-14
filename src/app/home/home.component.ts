@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   dates = [];
   today = new Date().toISOString().substring(0, 10);
   constructor(
-    private data: DataService,
     private stockServices: StockService,
     private authService: AuthService
   ) {
