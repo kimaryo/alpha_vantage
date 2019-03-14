@@ -37,4 +37,20 @@ export class StockService {
         this.store.dispatch({ type: "ADD_STOCK", payload: res });
       });
   }
+
+  addStock(symbol, userId) {
+    console.log(symbol, userId);
+    return this.http
+      .post(`${BASE_URL}subscriptions&label=${symbol}&userId=${userId}`)
+      .pipe(
+        map(res => {
+          const stock = res;
+
+          return new Stock().deserialize(stock);
+        })
+      )
+      .subscribe(res => {
+        this.store.dispatch({ type: "ADD_STOCK", payload: res });
+      });
+  }
 }
