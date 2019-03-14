@@ -1,24 +1,17 @@
 <h1>Search</h1>
-<div>
-    <app-contact>
-      </app-contact>
-    <app-searchbar>
-      
-    </app-searchbar>
-</div>
+<div><app-searchbar> </app-searchbar></div>
 
 <h1>My stock list</h1>
-<h3>Todays date: {{today}}</h3>
+<h3>Todays date: {{ today }}</h3>
 
-
-  <ul *ngIf = "stocks">
-    <li *ngFor = "let date of dates" style="white-space: nowrap">
-      <div style="display:inline-block; margin-right:20px;">
-            <a routerLink="/company/{{metaData['2. Symbol']}}" ><h4>Stock symbol: {{metaData['2. Symbol']}}</h4></a>
-            <h5>{{date}}</h5>
-            <div>
-              Closed at: {{stocks[date]["4. close"]}} $
-            </div>
-      </div>
-    </li>
-  </ul>
+<ul *ngIf="stocks">
+  <li *ngFor="let date of dates" style="white-space: nowrap">
+    <div style="display:inline-block; margin-right:20px;">
+      <a routerLink="/company/{{metaData['2. Symbol']}}"
+        ><h4>Stock symbol: {{ metaData["2. Symbol"] }}</h4></a
+      >
+      <h5>{{ date }}</h5>
+      <div>Closed at: {{ stocks[date]["4. close"] }} $</div>
+    </div>
+  </li>
+</ul>
