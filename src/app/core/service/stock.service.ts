@@ -57,8 +57,8 @@ export class StockService {
           return new Stock().deserialize(stock);
         })
       )
-      .subscribe(res => {
-        this.store.dispatch({ type: "ADD_STOCK", payload: res });
+      .subscribe((res: any) => {
+        this.store.dispatch({ type: "ADD_STOCK", payload: res.data });
       });
   }
 }
