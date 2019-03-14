@@ -8,9 +8,9 @@
 <div><app-searchbar> </app-searchbar></div>
 
 <ul *ngIf="stocks">
-  <li *ngFor="let stock of stocks" style="white-space: nowrap">
+  <li *ngFor="let stock of stocks.stocks" style="white-space: nowrap">
     <div style="display:inline-block; margin-right:20px;">
-      <a routerLink="/company/{{stock.label}}"
+      <a (click)="fetchStock(stock.label)" routerLink="/company/{{stock.label}}"
         ><h4>Stock symbol: {{ stock.label }}</h4></a
       >
     </div>

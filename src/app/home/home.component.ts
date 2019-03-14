@@ -21,8 +21,11 @@ export class HomeComponent implements OnInit {
     private authService: AuthService
   ) {
     this.stocks = stockServices.stocks;
-    console.log(this.stocks);
     this.auth = authService.auth;
+  }
+
+  fetchStock(symbol) {
+    this.stockServices.getStock(symbol);
   }
 
   ngOnInit() {

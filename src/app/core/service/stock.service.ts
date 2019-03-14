@@ -22,6 +22,7 @@ export class StockService {
   }
 
   getStock(symbol) {
+    this.store.dispatch({ type: "GET_STOCK" });
     return this.http
       .get(
         `${BASE_URL}function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${API_KEY}`
@@ -34,7 +35,7 @@ export class StockService {
         })
       )
       .subscribe(res => {
-        this.store.dispatch({ type: "ADD_STOCK", payload: res });
+        this.store.dispatch({ type: "GET_STOCK_SUCCESS", payload: res });
       });
   }
 }

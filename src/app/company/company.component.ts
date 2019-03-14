@@ -25,9 +25,9 @@ export class CompanyComponent implements OnInit {
   Highcharts = Highcharts;
 
   chartOptions: Object;
-
+  fetchingStock: boolean = true;
   stockData: Object;
-
+  showChart: boolean = false;
   stocks;
   metaData: Object;
   constructor(
@@ -45,59 +45,60 @@ export class CompanyComponent implements OnInit {
 
     this.subscription = this.stocks.subscribe(
       response => {
+        this.stocks = response;
         console.log(response);
-        // Currently the stocks is an array, a little bit contradictiv since we save it as an object.
-        // TODO: Add an initial state to the reducer store.
-        if (response.length !== 0) {
-          this.metaData = response["Meta Data"];
-          this.stockData = response["Time Series (Daily)"];
-          this.dates = Object.keys(this.stockData).slice(0, 20);
+        while (response.stocks.fetchingStock) {
+          this.setDataHighChart();
         }
-        this.setDataHighChart();
       },
       (this.loading = false),
       error => console.log(error)
     );
+    const splitUrl = window.location.href.split("/");
   }
 
   setDataHighChart() {
     let chartData = [];
-    if (this.stockData) {
-      for (let date in this.dates) {
-        chartData.push(
-          parseFloat(this.stockData[this.dates[date]]["4. close"])
-        );
-      }
-      this.chartOptions = {
-        series: [
-          {
-            data: {
-              yAxis: {
-                title: {
-                  text: "USD"
-                }
-              },
-              xAxis: {
-                title: {
-                  text: "Date"
+    if (this.stocks.stockShowing["Meta Data"]) {
+      this.showChart = true;
+      const stockData = this.stocks.stockShowing["Time Series (Daily)"];
+      const dates = Object.keys(stockData).slice(0, 20);
+
+      if (stockData) {
+        for (let date in dates) {
+          chartData.push(parseFloat(stockData[dates[date]]["4. close"]));
+        }
+        this.chartOptions = {
+          series: [
+            {
+              data: {
+                yAxis: {
+                  title: {
+                    text: "USD"
+                  }
                 },
-                type: "datetime",
-                dateTimeLabelFormats: {
-                  day: "%e. %b"
-                }
-              },
-              series: [
-                {
-                  pointStart: Date.UTC(2019, mm, dd),
-                  pointInterval: 24 * 3600 * 1000, // one day,
-                  name: "Closing value",
-                  data: chartData
-                }
-              ]
+                xAxis: {
+                  title: {
+                    text: "Date"
+                  },
+                  type: "datetime",
+                  dateTimeLabelFormats: {
+                    day: "%e. %b"
+                  }
+                },
+                series: [
+                  {
+                    pointStart: Date.UTC(2019, mm, dd),
+                    pointInterval: 24 * 3600 * 1000, // one day,
+                    name: "Closing value",
+                    data: chartData
+                  }
+                ]
+              }
             }
-          }
-        ]
-      };
+          ]
+        };
+      }
     }
   }
 }
