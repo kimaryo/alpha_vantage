@@ -72,7 +72,9 @@ export class CompanyComponent implements OnInit {
     let chartData = [];
     if (this.stockData) {
       for (let date in this.dates) {
-        chartData.push(parseInt(this.stockData[this.dates[date]]["4. close"]));
+        chartData.push(
+          parseFloat(this.stockData[this.dates[date]]["4. close"])
+        );
       }
       this.chartOptions = {
         yAxis: {
