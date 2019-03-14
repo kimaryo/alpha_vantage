@@ -107,7 +107,7 @@ export class AuthService {
                 payload: response.user
               });
               this.http
-                .get(`${BASE_URL}/subscriptions/${response.user._id}`)
+                .get(`${BASE_URL}subscriptions/${response.user._id}`)
                 .subscribe(
                   (response: any) => {
                     this.store.dispatch({
@@ -158,7 +158,7 @@ export class AuthService {
             });
             Storage.setToken(response.accessToken);
             this.http
-              .get(`${BASE_URL}/subscriptions/${response.user._id}`)
+              .get(`${BASE_URL}subscriptions/${response.user._id}`)
               .subscribe(
                 (response: any) => {
                   this.store.dispatch({

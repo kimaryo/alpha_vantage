@@ -11,7 +11,7 @@ import { ContactComponent } from "../contact/contact.component";
 })
 export class HomeComponent implements OnInit {
   metaData: Object;
-  stocks;
+  stocks = [];
   subscription;
   auth;
   dates = [];
@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
     private authService: AuthService
   ) {
     this.stocks = stockServices.stocks;
+    console.log(this.stocks);
     this.auth = authService.auth;
   }
 
@@ -28,13 +29,7 @@ export class HomeComponent implements OnInit {
     this.authService.validateSession();
     this.subscription = this.stocks.subscribe(
       response => {
-        // Currently the stocks is an array, a little bit contradictiv since we save it as an object.
-        // TODO: Add an initial state to the reducer store.
-        if (response.length !== 0) {
-          this.metaData = response["Meta Data"];
-          this.stocks = response["Time Series (Daily)"];
-          this.dates = Object.keys(this.stocks).slice(0, 20);
-        }
+        this.stocks = response;
       },
       error => console.log(error)
     );
@@ -44,9 +39,6 @@ export class HomeComponent implements OnInit {
       },
       error => console.log(error)
     );
-    this.stockServices.getStock();
-    setTimeout(() => console.log(this.stocks), 2000);
-    setTimeout(() => console.log(this.auth), 2000);
   }
 
   ngOnDestroy() {

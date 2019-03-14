@@ -38,21 +38,7 @@
         type="password"
         placeholder="Repeat password"
       />
-      <button type="submit">
-        <circle-progress
-          [percent]="100"
-          [radius]="20"
-          [outerStrokeWidth]="2"
-          [innerStrokeWidth]="2"
-          [outerStrokeColor]="'#FFF'"
-          [innerStrokeColor]="'#FFF'"
-          [animation]="true"
-          [animationDuration]="10000"
-          [showImage]="true"
-          *ngIf="auth.creatingAccount"
-        ></circle-progress>
-        <p *ngIf="!auth.creatingAccount">create</p>
-      </button>
+      <button type="submit"><p>create</p></button>
       <p class="message">
         Already registered?
         <a style="cursor:pointer;" (click)="onChangeSignInPage(true)"
@@ -80,19 +66,7 @@
         placeholder="password"
       />
       <button [disabled]="!loginForm.form.valid" type="submit">
-        <circle-progress
-          [percent]="100"
-          [radius]="20"
-          [outerStrokeWidth]="2"
-          [innerStrokeWidth]="2"
-          [outerStrokeColor]="'#FFF'"
-          [innerStrokeColor]="'#FFF'"
-          [animation]="true"
-          [animationDuration]="10000"
-          [showImage]="true"
-          *ngIf="auth.signingIn"
-        ></circle-progress>
-        <p *ngIf="!auth.signingIn">Log in</p>
+        <p>Log in</p>
       </button>
       <p class="message">
         Not registered?

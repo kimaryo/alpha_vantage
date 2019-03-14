@@ -21,10 +21,10 @@ export class StockService {
     this.stocks = store.select(s => s.stocks);
   }
 
-  getStock() {
+  getStock(symbol) {
     return this.http
       .get(
-        `${BASE_URL}function=TIME_SERIES_DAILY_ADJUSTED&symbol=MSFT&apikey=${API_KEY}`
+        `${BASE_URL}function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${API_KEY}`
       )
       .pipe(
         map(res => {

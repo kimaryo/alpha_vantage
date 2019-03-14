@@ -1,24 +1,18 @@
 <h1>Search for a stock</h1>
-<div>
-    <app-searchbar> 
-    </app-searchbar>
-</div>
-
+<div><app-searchbar> </app-searchbar></div>
 
 <h1>My stock list</h1>
-<h3>Todays date: {{today}}</h3>
-<button class = "button1">Save my stock list</button>
+<h3>Todays date: {{ today }}</h3>
+<button class="button1">Save my stock list</button>
 
 <div><app-searchbar> </app-searchbar></div>
 
 <ul *ngIf="stocks">
-  <li *ngFor="let date of dates" style="white-space: nowrap">
+  <li *ngFor="let stock of stocks" style="white-space: nowrap">
     <div style="display:inline-block; margin-right:20px;">
-      <a routerLink="/company/{{metaData['2. Symbol']}}"
-        ><h4>Stock symbol: {{ metaData["2. Symbol"] }}</h4></a
+      <a routerLink="/company/{{stock.label}}"
+        ><h4>Stock symbol: {{ stock.label }}</h4></a
       >
-      <h5>{{ date }}</h5>
-      <div>Closed at: {{ stocks[date]["4. close"] }} $</div>
     </div>
   </li>
 </ul>
