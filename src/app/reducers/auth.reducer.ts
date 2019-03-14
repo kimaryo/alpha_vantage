@@ -7,7 +7,6 @@ export const auth = (
   },
   { type, payload }
 ) => {
-  console.log(state);
   switch (type) {
     case "LOG_IN":
       return {

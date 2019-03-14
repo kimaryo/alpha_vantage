@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   ) {
     this.stocks = stockServices.stocks;
     this.user = authService.auth.user;
+  }
 
   ngOnInit() {
     this.authService.validateSession();
