@@ -1,3 +1,18 @@
-<input id="app-searchbar" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
+<input (keyup)="keyUpFunction($event)" id="app-searchbar" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
+<button id="button-add" type="submit" class="btn btn-success" style="margin-top: 20px">Display</button>
 <hr>
-<pre>Debug Model: {{ model | json }}</pre>
+<ul *ngIf = "arrayDisplayStocks">
+    <li *ngFor = "let stock of arrayDisplayStocks" style="white-space: nowrap">
+      <div style="display:inline-block; margin-right:20px;">
+            <a routerLink="/company/{{stock['1. symbol']}}" ><h4>{{stock['2. name']}} ({{stock['1. symbol']}})</h4></a>
+            <h5><b>Region:</b> {{stock['4. region']}}</h5>
+            <h5><b>Currency:</b> {{stock['8. currency']}}</h5>
+            <hr>
+            <app-company></app-company>
+      </div>
+    </li>
+
+  </ul>
+
+<!--<pre>Debug Model: {{ model }}</pre> -->
+
