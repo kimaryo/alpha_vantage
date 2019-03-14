@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   metaData: Object;
   stocks: Object;
   subscription: Object;
-  user: Object;
+  auth: Object;
   dates = [];
   today = new Date().toISOString().substring(0, 10);
   constructor(
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     private authService: AuthService
   ) {
     this.stocks = stockServices.stocks;
-    this.user = authService.auth.user;
+    this.auth = authService.auth;
   }
 
   ngOnInit() {
@@ -38,9 +38,15 @@ export class HomeComponent implements OnInit {
       },
       error => console.log(error)
     );
+    this.subscription = this.auth.subscribe(
+      response => {
+        this.auth = response;
+      },
+      error => console.log(error)
+    );
     this.stockServices.getStock();
     setTimeout(() => console.log(this.stocks), 2000);
-    setTimeout(() => console.log(this.authService.auth), 2000);
+    setTimeout(() => console.log(this.auth), 2000);
 
     if (this.authService.user && this.authService.user._id) {
       console.log(this.authService.user._id);

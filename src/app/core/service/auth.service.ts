@@ -17,7 +17,7 @@ const BASE_URL = "https://fathomless-plains-38408.herokuapp.com/";
   providedIn: "root"
 })
 export class AuthService {
-  auth: any;
+  auth: Object;
   constructor(
     private http: HttpClient,
     private store: Store<AppStore>,
