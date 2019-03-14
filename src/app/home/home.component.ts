@@ -11,9 +11,9 @@ import { ContactComponent } from "../contact/contact.component";
 })
 export class HomeComponent implements OnInit {
   metaData: Object;
-  stocks: Object;
-  subscription: Object;
-  auth: Object;
+  stocks;
+  subscription;
+  auth;
   dates = [];
   today = new Date().toISOString().substring(0, 10);
   constructor(
@@ -47,11 +47,6 @@ export class HomeComponent implements OnInit {
     this.stockServices.getStock();
     setTimeout(() => console.log(this.stocks), 2000);
     setTimeout(() => console.log(this.auth), 2000);
-
-    if (this.authService.user && this.authService.user._id) {
-      console.log(this.authService.user._id);
-      this.stockServices.getMyStocks(this.authService.user._id);
-    }
   }
 
   ngOnDestroy() {

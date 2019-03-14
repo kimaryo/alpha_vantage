@@ -16,7 +16,7 @@ const SERVER_BASE_URL = "https://fathomless-plains-38408.herokuapp.com/";
   providedIn: "root"
 })
 export class StockService {
-  stocks: Object;
+  stocks;
   constructor(private http: HttpClient, private store: Store<AppStore>) {
     this.stocks = store.select(s => s.stocks);
   }
@@ -49,7 +49,7 @@ export class StockService {
       )
       .pipe(
         map(res => {
-          const stock: Stock = res;
+          const stock = res;
 
           return new Stock().deserialize(stock);
         })
