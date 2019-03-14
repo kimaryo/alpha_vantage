@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 <input (keyup)="keyUpFunction($event)" id="app-searchbar" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" />
-<button id="button-add" type="submit" class="btn btn-success" style="margin-top: 20px">Display</button>
+<button id="button-add" type="submit" class="btn btn-success" style="margin-top: 20px">Save to list</button>
 <hr>
 <ul *ngIf = "arrayDisplayStocks">
     <li *ngFor = "let stock of arrayDisplayStocks" style="white-space: nowrap">
