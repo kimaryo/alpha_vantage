@@ -1,22 +1,25 @@
-export const stocks = (state: any = [], { type, payload }) => {
+export const stocks = (
+  state: any = { stocks: [], stockShowing: [], fetchingStock: false },
+  { type, payload }
+) => {
   switch (type) {
     case "GET_MY_STOCKS_SUCCESS":
-      console.log(payload);
-      return payload;
-    case "ADD_STOCK":
-      return payload;
-    case "CREATE_STOCK":
-      return [...state, payload];
-    case "UPDATE_STOCK":
-      return state.map(campaign => {
-        return campaign.token === payload.token
-          ? Object.assign({}, campaign, payload)
-          : campaign;
-      });
-    case "DELETE_STOCK":
-      return state.filter(campaign => {
-        return campaign.token !== payload.token;
-      });
+      return {
+        ...state,
+        stocks: payload
+      };
+    case "GET_STOCK":
+      return {
+        ...state,
+        stockShowing: payload,
+        fetchingStock: true
+      };
+    case "GET_STOCK_SUCCESS":
+      return {
+        ...state,
+        stockShowing: payload,
+        fetchingStock: false
+      };
     default:
       return state;
   }
