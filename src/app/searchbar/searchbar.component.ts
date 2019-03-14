@@ -19,6 +19,7 @@ export class SearchbarComponent implements OnInit {
   model: String;
   currentData = [];
   auth;
+  subscription;
   arrayDisplayStocks = [];
   testhtArray = [{ test: 1 }, { test: 2 }];
   constructor(
@@ -44,7 +45,7 @@ export class SearchbarComponent implements OnInit {
       let index = Number.parseInt(temp) - 1;
       const symbol = this.currentData[index]["1. symbol"];
       const userId = this.auth.user._id;
-      console.log(this.stockServices.addStock(symbol, userId));
+      this.stockServices.addStock(symbol, userId);
     }
   }
 

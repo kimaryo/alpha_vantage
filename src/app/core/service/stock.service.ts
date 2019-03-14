@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Store } from "@ngrx/store";
-
+import { Observable } from "rxjs";
 import { Stock } from "../../shared/models/stock.model";
 import { AppStore } from "../../app.store";
 
@@ -19,6 +19,10 @@ export class StockService {
   stocks;
   constructor(private http: HttpClient, private store: Store<AppStore>) {
     this.stocks = store.select(s => s.stocks);
+  }
+
+  getStocks() {
+    return this.stocks;
   }
 
   getStock(symbol) {
@@ -41,12 +45,15 @@ export class StockService {
 
   addStock(symbol, userId) {
     console.log(symbol, userId);
+    const body = {
+      label: symbol,
+      userId
+    };
     return this.http
-      .post(`${BASE_URL}subscriptions&label=${symbol}&userId=${userId}`)
+      .post(`${SERVER_BASE_URL}subscriptions`, body)
       .pipe(
         map(res => {
           const stock = res;
-
           return new Stock().deserialize(stock);
         })
       )

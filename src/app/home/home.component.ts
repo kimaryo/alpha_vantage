@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.authService.validateSession();
-    this.subscription = this.stocks.subscribe(
+    this.subscription = this.stockServices.getStocks().subscribe(
       response => {
         this.stocks = response;
       },
