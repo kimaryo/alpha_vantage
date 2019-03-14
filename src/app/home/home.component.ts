@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { DataService } from "../data.service";
 import { StockService } from "../core/service/stock.service";
 import { AuthService } from "../core/service/auth.service";
 import { SearchbarComponent } from "../searchbar/searchbar.component";
@@ -17,6 +16,7 @@ export class HomeComponent implements OnInit {
   user: Object;
   dates = [];
   today = new Date().toISOString().substring(0, 10);
+<<<<<<< HEAD
   constructor(
     private data: DataService,
     private stockServices: StockService,
@@ -24,6 +24,11 @@ export class HomeComponent implements OnInit {
   ) {
     this.stocks = stockServices.stocks;
     this.user = authService.auth.user;
+=======
+  constructor(private stockServices: StockService) {
+    this.stocks = stockServices.stocks;
+    let x;
+>>>>>>> 2573c1fc3393ce38590000cd428c0a9b9f6212e2
   }
 
   ngOnInit() {
