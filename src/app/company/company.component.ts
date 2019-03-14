@@ -18,9 +18,9 @@ Highcharts.setOptions({
 })
 export class CompanyComponent implements OnInit {
   dates = [];
-  sub: Object;
+  sub;
   loading = false;
-  subscription: Object;
+  subscription;
   companySymbol: String;
   Highcharts = Highcharts;
 
@@ -34,7 +34,7 @@ export class CompanyComponent implements OnInit {
 
   stockData: Object;
 
-  stocks: Object;
+  stocks;
   metaData: Object;
   constructor(
     private route: ActivatedRoute,
