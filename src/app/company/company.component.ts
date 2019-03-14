@@ -24,13 +24,7 @@ export class CompanyComponent implements OnInit {
   companySymbol: String;
   Highcharts = Highcharts;
 
-  chartOptions = {
-    series: [
-      {
-        data: this.setDataHighChart()
-      }
-    ]
-  };
+  chartOptions: Object;
 
   stockData: Object;
 
@@ -75,26 +69,32 @@ export class CompanyComponent implements OnInit {
         );
       }
       this.chartOptions = {
-        yAxis: {
-          title: {
-            text: "USD"
-          }
-        },
-        xAxis: {
-          title: {
-            text: "Date"
-          },
-          type: "datetime",
-          dateTimeLabelFormats: {
-            day: "%e. %b"
-          }
-        },
         series: [
           {
-            pointStart: Date.UTC(2019, mm, dd),
-            pointInterval: 24 * 3600 * 1000, // one day,
-            name: "Closing value",
-            data: chartData
+            data: {
+              yAxis: {
+                title: {
+                  text: "USD"
+                }
+              },
+              xAxis: {
+                title: {
+                  text: "Date"
+                },
+                type: "datetime",
+                dateTimeLabelFormats: {
+                  day: "%e. %b"
+                }
+              },
+              series: [
+                {
+                  pointStart: Date.UTC(2019, mm, dd),
+                  pointInterval: 24 * 3600 * 1000, // one day,
+                  name: "Closing value",
+                  data: chartData
+                }
+              ]
+            }
           }
         ]
       };

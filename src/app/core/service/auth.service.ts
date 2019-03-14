@@ -29,8 +29,8 @@ export class AuthService {
   register(data) {
     this.store.dispatch({ type: "CREATE_ACCOUNT" });
     return this.http.post(`${BASE_URL}users/register`, data).subscribe(
-      response => {
-        if (response.status === "409") {
+      (response: any) => {
+        if ("status" in response && response.status === "409") {
           this.store.dispatch({ type: "CREATE_ACCOUNT_FAILED" });
           const modalRef = this.modalService.open(ModalContentComponent);
           modalRef.componentInstance.content = {
@@ -92,8 +92,7 @@ export class AuthService {
           this.getConfig(token)
         )
         .subscribe(
-          response => {
-            console.log(response);
+          (response: any) => {
             if (response.status === 404) {
               this.store.dispatch({ type: "LOG_IN_FAILED" });
               const modalRef = this.modalService.open(ModalContentComponent);
@@ -107,9 +106,22 @@ export class AuthService {
                 type: "LOG_IN_SUCCESS",
                 payload: response.user
               });
-              const splitUrl = window.location.href.split("/");
-              if (splitUrl[splitUrl.length - 1] !== "home")
-                window.location.replace("/home");
+              this.http
+                .get(`${BASE_URL}/subscriptions/${response.user._id}`)
+                .subscribe(
+                  (response: any) => {
+                    this.store.dispatch({
+                      type: "GET_MY_STOCKS_SUCCESS",
+                      payload: response.data
+                    });
+                    const splitUrl = window.location.href.split("/");
+                    if (splitUrl[splitUrl.length - 1] !== "home")
+                      window.location.replace("/home");
+                  },
+                  error => {
+                    this.store.dispatch({ type: "GET_MY_STOCKS_FAILED" });
+                  }
+                );
             }
           },
           error => {
@@ -131,7 +143,7 @@ export class AuthService {
         password: password
       })
       .subscribe(
-        response => {
+        (response: any) => {
           if (response.status === "404") {
             const modalRef = this.modalService.open(ModalContentComponent);
             modalRef.componentInstance.content = {
@@ -144,8 +156,23 @@ export class AuthService {
               type: "LOG_IN_SUCCESS",
               payload: response.user
             });
-            window.location.replace("/home");
             Storage.setToken(response.accessToken);
+            this.http
+              .get(`${BASE_URL}/subscriptions/${response.user._id}`)
+              .subscribe(
+                (response: any) => {
+                  this.store.dispatch({
+                    type: "GET_MY_STOCKS_SUCCESS",
+                    payload: response.data
+                  });
+                  const splitUrl = window.location.href.split("/");
+                  if (splitUrl[splitUrl.length - 1] !== "home")
+                    window.location.replace("/home");
+                },
+                error => {
+                  this.store.dispatch({ type: "GET_MY_STOCKS_FAILED" });
+                }
+              );
           }
         },
         error => {

@@ -21,27 +21,6 @@ export class StockService {
     this.stocks = store.select(s => s.stocks);
   }
 
-  getMyStocks(userId) {
-    return this.http
-      .get(`${SERVER_BASE_URL}/subscriptions/${userId}`)
-      .subscribe(
-        response => {
-          this.store.dispatch({
-            type: "GET_MY_STOCKS_SUCCESS",
-            payload: response.data
-          });
-        },
-        error => {
-          this.store.dispatch({ type: "GET_MY_STOCKS_FAILED" });
-          // const modalRef = this.modalService.open(ModalContentComponent);
-          // modalRef.componentInstance.content = {
-          //   title: "Something went wrong",
-          //   text: "Something went wrong. Please try again"
-          // };
-        }
-      );
-  }
-
   getStock() {
     return this.http
       .get(
