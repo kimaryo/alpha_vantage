@@ -4,9 +4,9 @@
   [config]="{ backdropBorderRadius: '3px' }"
 ></ngx-loading>
 <highcharts-chart
-  *ngIf="showChart"
   [Highcharts]="Highcharts"
   [options]="chartOptions"
   title="title"
   style="width: 100%; height: 400px; display: block;"
 ></highcharts-chart>
+<a (click)="updateChart()">Update Chart</a>

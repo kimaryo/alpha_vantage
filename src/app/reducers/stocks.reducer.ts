@@ -1,7 +1,9 @@
 export const stocks = (
-  state: any = { stocks: [], stockShowing: [], fetchingStock: false },
+  state: Object = { stocks: [], stockShowing: [], fetchingStock: false },
   { type, payload }
 ) => {
+  console.log(type);
+  console.log(payload);
   switch (type) {
     case "GET_MY_STOCKS_SUCCESS":
       return {
@@ -11,7 +13,6 @@ export const stocks = (
     case "GET_STOCK":
       return {
         ...state,
-        stockShowing: payload,
         fetchingStock: true
       };
     case "GET_STOCK_SUCCESS":

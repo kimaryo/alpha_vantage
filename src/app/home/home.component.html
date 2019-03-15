@@ -7,8 +7,8 @@
 <ul *ngIf="stocks">
   <li *ngFor="let stock of stocks.stocks" style="white-space: nowrap">
     <div style="display:inline-block; margin-right:20px;">
-      <a (click)="fetchStock(stock.label)" routerLink="/company/{{stock.label}}"
-        ><h4>Stock symbol: {{ stock.label }}</h4></a
+      <a routerLink="/company/{{stock['Meta Data']['2. Symbol']}}">
+        <h4>Stock symbol: {{ stock["Meta Data"]["2. Symbol"] }}</h4></a
       >
     </div>
   </li>

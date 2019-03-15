@@ -12,6 +12,9 @@ import { AppStore } from "../../app.store";
 import * as Storage from "../../helpers/Storage";
 
 const BASE_URL = "https://fathomless-plains-38408.herokuapp.com/";
+const API_KEY = "F8EATDHYRIQMFR0N";
+
+const ALPHA_BASE_URL = "https://www.alphavantage.co/query?";
 
 @Injectable({
   providedIn: "root"
@@ -106,22 +109,10 @@ export class AuthService {
                 type: "LOG_IN_SUCCESS",
                 payload: response.user
               });
-              this.http
-                .get(`${BASE_URL}subscriptions/${response.user._id}`)
-                .subscribe(
-                  (response: any) => {
-                    this.store.dispatch({
-                      type: "GET_MY_STOCKS_SUCCESS",
-                      payload: response.data
-                    });
-                    const splitUrl = window.location.href.split("/");
-                    if (splitUrl[splitUrl.length - 1] !== "home")
-                      window.location.replace("/home");
-                  },
-                  error => {
-                    this.store.dispatch({ type: "GET_MY_STOCKS_FAILED" });
-                  }
-                );
+              this.fetchStockData(response);
+              const splitUrl = window.location.href.split("/");
+              if (splitUrl[splitUrl.length - 1] === "login")
+                window.location.replace("/home");
             }
           },
           error => {
@@ -193,6 +184,46 @@ export class AuthService {
           }
         }
       );
+  }
+
+  fetchStockData(response) {
+    console.log(response);
+    let myStocks = [];
+    this.http.get(`${BASE_URL}subscriptions/${response.user._id}`).subscribe(
+      (response: any) => {
+        myStocks = response.data;
+        Promise.all(
+          response.data.map(s =>
+            this.http.get(
+              `${ALPHA_BASE_URL}function=TIME_SERIES_DAILY_ADJUSTED&symbol=${
+                s.label
+              }&apikey=${API_KEY}`
+            )
+          )
+        ).then(resp => {
+          const stocksFetched = [];
+          resp.forEach(r =>
+            r
+              .pipe(
+                map(res => {
+                  return new Stock().deserialize(res);
+                })
+              )
+              .subscribe(res => {
+                stocksFetched.push(res);
+              })
+          );
+          console.log(stocksFetched);
+          this.store.dispatch({
+            type: "GET_MY_STOCKS_SUCCESS",
+            payload: stocksFetched
+          });
+        });
+      },
+      error => {
+        this.store.dispatch({ type: "GET_MY_STOCKS_FAILED" });
+      }
+    );
   }
 
   signOut() {

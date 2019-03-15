@@ -1,5 +1,5 @@
 export const auth = (
-  state: any = {
+  state: Object = {
     signedIn: false,
     signingIn: false,
     creatingAccount: false,

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { StockService } from "../core/service/stock.service";
 import { AuthService } from "../core/service/auth.service";
 import { SearchbarComponent } from "../searchbar/searchbar.component";
+import { Router } from "@angular/router";
 import { ContactComponent } from "../contact/contact.component";
 
 @Component({
@@ -18,14 +19,11 @@ export class HomeComponent implements OnInit {
   today = new Date().toISOString().substring(0, 10);
   constructor(
     private stockServices: StockService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.stocks = stockServices.stocks;
     this.auth = authService.auth;
-  }
-
-  fetchStock(symbol) {
-    this.stockServices.getStock(symbol);
   }
 
   ngOnInit() {
