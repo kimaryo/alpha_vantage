@@ -12,7 +12,7 @@ import { ContactComponent } from "../contact/contact.component";
 })
 export class HomeComponent implements OnInit {
   metaData: Object;
-  stocks = [];
+  stocks;
   subscription;
   auth;
   dates = [];

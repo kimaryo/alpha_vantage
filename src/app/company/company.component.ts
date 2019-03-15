@@ -16,13 +16,7 @@ Highcharts.setOptions({
     }
   },
   xAxis: {
-    title: {
-      text: "Date"
-    },
-    type: "datetime",
-    dateTimeLabelFormats: {
-      day: "%e %b"
-    }
+    type: "datetime"
   },
   plotOptions: {
     series: {
@@ -47,16 +41,16 @@ export class CompanyComponent implements OnInit {
   chartOptions = {
     series: [
       {
-        data: this.updateChart()
+        data: [0]
       }
     ]
   };
   fetchingStock: boolean = true;
   stockData: Object;
   showChart: boolean = false;
-  stocks: Object;
+  stocks;
   metaData: Object;
-  auth: Object;
+  auth;
   constructor(
     private route: ActivatedRoute,
     private stockServices: StockService,
@@ -88,7 +82,7 @@ export class CompanyComponent implements OnInit {
       error => console.log(error)
     );
 
-    setTimeout(() => this.updateChart(), 4000);
+    setTimeout(() => this.updateChart(), 1100);
   }
 
   updateChart() {
@@ -108,7 +102,6 @@ export class CompanyComponent implements OnInit {
         this.chartOptions = {
           series: [
             {
-              name: "Closing value",
               data: chartData
             }
           ]

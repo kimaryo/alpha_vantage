@@ -8,13 +8,14 @@ import { AppStore } from "../../app.store";
 
 const DUMMY_COMPANIES = ["MSFT", "BA", "AAPL", "TSLA"];
 const API_KEY = "F8EATDHYRIQMFR0N";
-const BASE_URL = "https://www.alphavantage.co/query?";
+const ALPHA_BASE_URL = "https://www.alphavantage.co/query?";
+const BASE_URL = "https://fathomless-plains-38408.herokuapp.com/";
 
 @Injectable({
   providedIn: "root"
 })
 export class StockService {
-  stocks: Object;
+  stocks: any;
   constructor(private http: HttpClient, private store: Store<AppStore>) {
     this.stocks = store.select(s => s.stocks);
   }
@@ -27,7 +28,7 @@ export class StockService {
     this.store.dispatch({ type: "GET_STOCK" });
     return this.http
       .get(
-        `${BASE_URL}function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${API_KEY}`
+        `${ALPHA_BASE_URL}function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${API_KEY}`
       )
       .pipe(
         map(res => {
@@ -48,7 +49,7 @@ export class StockService {
       userId
     };
     return this.http
-      .post(`${SERVER_BASE_URL}subscriptions`, body)
+      .post(`${BASE_URL}subscriptions`, body)
       .pipe(
         map(res => {
           const stock = res;

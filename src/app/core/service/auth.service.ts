@@ -148,22 +148,10 @@ export class AuthService {
               payload: response.user
             });
             Storage.setToken(response.accessToken);
-            this.http
-              .get(`${BASE_URL}subscriptions/${response.user._id}`)
-              .subscribe(
-                (response: any) => {
-                  this.store.dispatch({
-                    type: "GET_MY_STOCKS_SUCCESS",
-                    payload: response.data
-                  });
-                  const splitUrl = window.location.href.split("/");
-                  if (splitUrl[splitUrl.length - 1] !== "home")
-                    window.location.replace("/home");
-                },
-                error => {
-                  this.store.dispatch({ type: "GET_MY_STOCKS_FAILED" });
-                }
-              );
+            this.fetchStockData(response);
+            const splitUrl = window.location.href.split("/");
+            if (splitUrl[splitUrl.length - 1] !== "home")
+              window.location.replace("/home");
           }
         },
         error => {
@@ -202,7 +190,7 @@ export class AuthService {
           )
         ).then(resp => {
           const stocksFetched = [];
-          resp.forEach(r =>
+          resp.forEach((r: any) =>
             r
               .pipe(
                 map(res => {
